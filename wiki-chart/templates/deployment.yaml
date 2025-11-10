@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: wiki
+  labels:
+    app: wiki
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wiki
+  template:
+    metadata:
+      labels:
+        app: wiki
+    spec:
+      containers:
+        - name: wiki
+          image: wiki-service:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8000
+              protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 20
+      #     volumeMounts:
+      #       - name: app-storage
+      #         mountPath: /app
+      # volumes:
+      #   - name: app-storage
+      #     emptyDir: {}
