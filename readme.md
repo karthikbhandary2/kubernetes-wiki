@@ -3,7 +3,6 @@
 This repository contains a Wiki application service (`wiki-service`) and a Helm chart (`wiki-chart`) to deploy the service on Kubernetes. The repository also includes a containerized setup for running a local `k3d` Kubernetes cluster.
 
 ---
-
 ## Table of Contents
 
 - [Repository Structure](#repository-structure)
